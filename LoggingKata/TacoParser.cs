@@ -23,15 +23,28 @@
 
             //catch array.Length<3 errors
 
-            if (cells.Length < 3)
+            if (cells.Length != 3)
             {
                 //log
                 return null;
             }
 
-            double latitude = double.Parse(cells[0]);
-            double longittude = double.Parse(cells[1]);
-            string locationName = cells[2];
+            double latitude;
+            double longittude;
+            if(!double.TryParse(cells[0], out latitude) || !double.TryParse(cells[1], out longittude))
+            {
+                return null;
+            }
+
+            string locationName = cells[2].Trim();
+  
+
+            //catch invalid input
+
+            if (latitude < -90 || latitude > 90 || longittude < -180 || longittude > 180 || locationName.Length < 1 || locationName.ToLower()[0] != 't' || !locationName.ToLower().Contains("taco bell"))
+            {
+                return null;
+            }
 
             //instantiate TacoBell and Point
             TacoBell tacobell = new TacoBell();

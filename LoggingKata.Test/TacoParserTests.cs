@@ -12,12 +12,12 @@ namespace LoggingKata.Test
         }
 
         [Theory]
-        [InlineData("Example")]
-        [InlineData("50, 50, Taco Bell Warrior", null)]
-        [InlineData("0, 180, Taco Bell Gardendale", null)]
-        [InlineData("90, 0, Taco Bell Cullman", null)]
-        public void ShouldParse(string str, ITrackable expected)
+        [InlineData("0, 0, Taco Bell Warrior", 0, 0, "Taco Bell Warrior")]
+        [InlineData("-90, 180, Taco Bell Gardendale", -90, 180, "Taco Bell Gardendale")]
+        [InlineData("90, -180, Taco Bell Cullman", 90, -180, "Taco Bell Cullman")]
+        public void ShouldParse(string str, double expectedLat, double expectedLon, string expectedName)
         {
+         
             // Arrange
             TacoParser tacoparser = new TacoParser();
 
@@ -25,22 +25,28 @@ namespace LoggingKata.Test
             ITrackable actual = tacoparser.Parse(str);
 
             // Assert
-            Assert.Equal(expected, actual);
+            Assert.Equal(expectedLat, actual.Location.Latitude);
+            Assert.Equal(expectedLon, actual.Location.Longitude);
+            Assert.Equal(expectedName, actual.Name);
         }
 
         [Theory]
-        [InlineData(null, null)]
-        [InlineData("", null)]
-        [InlineData("-1, 50, Taco Bell Warrior", null)]
-        [InlineData("50, -1, Taco Bell Warrior", null)]
-        [InlineData("91, 50, Taco Bell Warrior", null)]
-        [InlineData("50, 181, Taco Bell Warrior", null)]
-        [InlineData("50, 50,", null)]
-        [InlineData(", 50, Taco Bell Warrior", null)]
-        [InlineData("50,, Taco Bell Warrior", null)]
-        [InlineData("taco, 50, Taco Bell Warrior", null)]
-        [InlineData("50, bell, Taco Bell Warrior", null)]
-        public void ShouldFailParse(string str, ITrackable expected)
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("-91, 50, Taco Bell Warrior")]
+        [InlineData("91, 50, Taco Bell Warrior")]
+        [InlineData("50, -181, Taco Bell Warrior")]
+        [InlineData("50, 181, Taco Bell Warrior")]
+        [InlineData("50, 50, ")]
+        [InlineData("50, 50,")]
+        [InlineData(", 50, Taco Bell Warrior")]
+        [InlineData("50,, Taco Bell Warrior")]
+        [InlineData("taco, 50, Taco Bell Warrior")]
+        [InlineData("50, bell, Taco Bell Warrior")]
+        [InlineData("50, bell, Wendy's Gardendale")]
+        [InlineData("50, bell, Taco Mama Downtown Birmingham")]
+        [InlineData("50, 50, Taco Bell Warrior, oops too many parameters")]
+        public void ShouldFailParse(string str)
         {
             // Arrange
             TacoParser tacoparser = new TacoParser();
@@ -49,7 +55,7 @@ namespace LoggingKata.Test
             ITrackable actual = tacoparser.Parse(str);
 
             // Assert
-            Assert.Equal(expected, actual);
+            Assert.Null(actual);
         }
     }
 }
