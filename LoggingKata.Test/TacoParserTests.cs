@@ -22,7 +22,7 @@ namespace LoggingKata.Test
         [InlineData(null, null)]
         [InlineData("", null)]
         public void ShouldFailParse(string str, ITrackable expected)
-        {/*
+        {
             // Arrange
             TacoParser tacoparser = new TacoParser();
 
@@ -30,7 +30,7 @@ namespace LoggingKata.Test
             ITrackable actual = tacoparser.Parse(str);
 
             // Assert
-            Assert.Equal(expected, actual);*/
+            Assert.Equal(expected, actual);
         }
     }
 }
