@@ -27,6 +27,13 @@ namespace LoggingKata
 
             ITrackable tBell1 = null;
             ITrackable tBell2 = null;
+            double distance = 0;
+
+            foreach (var location in locations)
+            {
+                var locA = location;
+                GeoCoordinate corA = new GeoCoordinate(locA.Location.Latitude, locA.Location.Longitude);
+            }
         }
     }
 }
