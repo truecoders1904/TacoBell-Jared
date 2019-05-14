@@ -46,7 +46,9 @@ namespace LoggingKata
                         tBell2 = locB;
                     }
                 }
+
             }
+                Console.WriteLine($"\n\nThe two furthest apart are:\n{tBell1.Name}\n{tBell2.Name}\nThey are {distance} miles apart.");
 
         }
     }
