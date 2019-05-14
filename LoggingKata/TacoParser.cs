@@ -10,6 +10,14 @@
         public ITrackable Parse(string line)
         {
             logger.LogInfo("Begin parsing");
+            
+            //catch null errors
+
+            if (line == null)
+            {
+                //log
+                return null;
+            }
 
             var cells = line.Split(',');
 

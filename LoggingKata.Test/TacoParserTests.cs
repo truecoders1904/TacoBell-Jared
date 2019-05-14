@@ -19,11 +19,18 @@ namespace LoggingKata.Test
         }
 
         [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        public void ShouldFailParse(string str)
-        {
-            // TODO: Complete Should Fail Parse
+        [InlineData(null, null)]
+        [InlineData("", null)]
+        public void ShouldFailParse(string str, ITrackable expected)
+        {/*
+            // Arrange
+            TacoParser tacoparser = new TacoParser();
+
+            // Act
+            ITrackable actual = tacoparser.Parse(str);
+
+            // Assert
+            Assert.Equal(expected, actual);*/
         }
     }
 }
