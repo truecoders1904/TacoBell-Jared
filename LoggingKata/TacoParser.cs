@@ -25,6 +25,13 @@
             double longittude = double.Parse(cells[1]);
             string locationName = cells[2];
 
+            //instantiate TacoBell and Point
+            TacoBell tacobell = new TacoBell();
+            Point point = new Point(latitude, longittude);
+
+            //set Name and Location
+            tacobell.Name = locationName;
+            tacobell.Location = point;
             // Do not fail if one record parsing fails, return null
             return null; // TODO Implement
         }
