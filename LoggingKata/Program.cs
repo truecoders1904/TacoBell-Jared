@@ -33,7 +33,21 @@ namespace LoggingKata
             {
                 var locA = location;
                 GeoCoordinate corA = new GeoCoordinate(locA.Location.Latitude, locA.Location.Longitude);
+
+                foreach (var destination in locations)
+                {
+                    var locB = destination;
+                    GeoCoordinate corB = new GeoCoordinate(locB.Location.Latitude, locB.Location.Longitude);
+
+                    if (corA.GetDistanceTo(corB) > distance)
+                    {
+                        distance = corA.GetDistanceTo(corB);
+                        tBell1 = locA;
+                        tBell2 = locB;
+                    }
+                }
             }
+
         }
     }
 }
